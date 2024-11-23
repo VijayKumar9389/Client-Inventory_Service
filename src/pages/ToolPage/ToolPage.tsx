@@ -5,7 +5,7 @@ import PageHeader from "../../components/PageHeader.tsx";
 import { FaPlus } from "react-icons/fa6";
 import ToolList from "./components/ToolList.tsx";
 import {useFetchTools} from "../../hooks/useFetchTools.ts";
-import { ErrorMessage, LoadingMessage} from "../../components/Message.tsx";
+import { ErrorMessage} from "../../components/Message.tsx";
 import ToolFilter from "./components/ToolFilter.tsx";
 
 const ToolPage: React.FC = () => {
@@ -24,8 +24,6 @@ const ToolPage: React.FC = () => {
         tool.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    if (loading) return <LoadingMessage message="Loading tools..." />;
-    if (error) return <ErrorMessage message={error} />;
 
     return (
         <div className="page-container">
@@ -43,7 +41,13 @@ const ToolPage: React.FC = () => {
                 element={<CreateToolForm />}
                 heading="Add Tool"
             />
-            <ToolList tools={filteredTools} />
+
+            {/* Conditionally render tool List or error */}
+            {error ? (
+                <ErrorMessage message="Error retrieving tools" />
+            ) : (
+                <ToolList tools={filteredTools} loading={loading} />
+            )}
         </div>
     );
 }

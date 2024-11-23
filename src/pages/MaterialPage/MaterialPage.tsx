@@ -5,7 +5,7 @@ import {useState} from "react";
 import PageHeader from "../../components/PageHeader.tsx";
 import { FaPlus} from "react-icons/fa6";
 import {useFetchMaterials} from "../../hooks/useFetchMaterials.ts";
-import {ErrorMessage, LoadingMessage} from "../../components/Message.tsx";
+import {ErrorMessage} from "../../components/Message.tsx";
 import MaterialFilter from "./components/MaterialFilter.tsx";
 
 const MaterialPage = () => {
@@ -24,9 +24,6 @@ const MaterialPage = () => {
         return material.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
-    if (loading) return <LoadingMessage message="Loading materials..." />;
-    if (error) return <ErrorMessage message={error} />;
-
     return (
         <div className="page-container">
             <PageHeader
@@ -43,7 +40,12 @@ const MaterialPage = () => {
                 element={<CreateMaterialForm />}
                 heading="Add Material"
             />
-            <MaterialList materials={filteredMaterials} />
+            {/* Conditionally render Material List or error */}
+            {error ? (
+                <ErrorMessage message="Error retrieving locations" />
+            ) : (
+                <MaterialList materials={filteredMaterials} loading={loading}/>
+            )}
         </div>
     );
 }

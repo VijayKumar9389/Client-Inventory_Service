@@ -1,15 +1,15 @@
-import {useState} from "react";
-import {LocationTable} from "./components/LocationTable.tsx";
+import React, {useState} from "react";
+import LocationList from "./components/LocationList.tsx";
 import CreateLocationForm from "./components/CreateLocationForm.tsx";
 import Dialog from "../../components/Dialog.tsx";
 import PageHeader from "../../components/PageHeader.tsx";
 import {FaPlus} from "react-icons/fa6";
 import LocationFilter from "./components/LocationFilter.tsx";
-import {ErrorMessage, LoadingMessage} from "../../components/Message.tsx";
-import {useFetchLocations} from "../../hooks/useFetchLocations.ts"; // Import the dialog component
+import {ErrorMessage} from "../../components/Message.tsx";
+import {useFetchLocations} from "../../hooks/useFetchLocations.ts";
 
 // Main LocationPage component
-const LocationPage = () => {
+const LocationPage: React.FC = () => {
     const {locations, error, loading} = useFetchLocations();
     const [isDialogOpen, setIsDialogOpen] = useState(false); // State for managing dialog
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -23,9 +23,6 @@ const LocationPage = () => {
     const filteredLocations = locations.filter(location =>
         location.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    if (loading) return <LoadingMessage message="Loading locations..."/>
-    if (error) return <ErrorMessage message={error}/>
 
     return (
         <div className="page-container">
@@ -53,8 +50,12 @@ const LocationPage = () => {
                 heading="Add Location"
             />
 
-            {/* Locations Table */}
-            <LocationTable locations={filteredLocations}/>
+            {/* Conditionally render Location List or error */}
+            {error ? (
+                <ErrorMessage message="Error retrieving locations" />
+            ) : (
+                <LocationList locations={filteredLocations} loading={loading}/>
+            )}
         </div>
     );
 };

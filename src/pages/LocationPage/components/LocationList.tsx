@@ -1,10 +1,22 @@
-import { Location } from "../../../models/location.models.ts";
+import {Location} from "../../../models/location.models.ts";
+import {useNavigate} from "react-router-dom";
+import {ErrorMessage, LoadingMessage} from "../../../components/Message.tsx";
 
-export const LocationTable: React.FC<{ locations: Location[] }> = ({ locations }) => {
+const LocationList: React.FC<{ locations: Location[], loading: boolean }> = ({locations, loading}) => {
+    const nav = useNavigate();
+
+    const goToLocationDetail = (id: number) => {
+        nav(`/locations/${id}`);
+    };
+
+    if (loading) return <LoadingMessage message="Loading locations..."/>;
+
     return (
-            <div className="list-container">
-                {locations.map(location => (
-                    <div key={location.id} className="card-container">
+        <div className="list-container">
+            {locations.length ? (
+                locations.map(location => (
+                    <div key={location.id} className="card-container" onClick={() => goToLocationDetail(location.id)}>
+
                         {/* Image Section (User Logo Placeholder) */}
                         <div className="card-image">
                             <div className="user-logo">
@@ -27,7 +39,12 @@ export const LocationTable: React.FC<{ locations: Location[] }> = ({ locations }
                             </div>
                         </div>
                     </div>
-                ))}
-            </div>
+                ))
+            ) : (
+                <ErrorMessage message="No locations found."/>
+            )}
+        </div>
     );
 };
+
+export default LocationList

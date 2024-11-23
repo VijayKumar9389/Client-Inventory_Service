@@ -1,38 +1,30 @@
-import React, {useState} from "react";
-import UserTable from "./components/UserTable.tsx";
-import CreateUserForm from "./components/CreateUserForm.tsx";
-import Dialog from "../../components/Dialog.tsx";
+import React, { useState } from "react";
+import { FaPlus } from "react-icons/fa6";
+import { useFetchUsers } from "../../hooks/useFetchUsers.ts";
+import { ErrorMessage } from "../../components/Message.tsx";
 import PageHeader from "../../components/PageHeader.tsx";
-import {FaPlus} from "react-icons/fa6";
-import {useFetchUsers} from "../../hooks/useFetchUsers.ts";
 import UserFilter from "./components/UserFilter.tsx";
-import {ErrorMessage, LoadingMessage} from "../../components/Message.tsx";
+import Dialog from "../../components/Dialog.tsx";
+import CreateUserForm from "./components/CreateUserForm.tsx";
+import UserList from "./components/UserList.tsx";
 
 const UserPage: React.FC = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const {users, loading, error} = useFetchUsers();
+    const { users = [], loading, error } = useFetchUsers(); // Default to empty array if users is undefined
 
-    // Handles search input change
     const handleSearch = (value: string) => setSearchTerm(value);
+    const toggleDialog = () => setIsDialogOpen(!isDialogOpen);
 
-    const toggleDialog = () => {
-        setIsDialogOpen(!isDialogOpen);
-    };
-
-    // filter users based on search term
     const filteredUsers = users.filter(user =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    if (loading) return <LoadingMessage message="Loading users..."/>;
-    if (error) return <ErrorMessage message={error}/>;
 
     return (
         <div className="page-container">
             {/* Header Section */}
             <PageHeader
-                title="Users "
+                title="Users"
                 buttonLabel="Add User"
                 buttonIcon={FaPlus}
                 onButtonClick={toggleDialog}
@@ -50,12 +42,16 @@ const UserPage: React.FC = () => {
             <Dialog
                 isOpen={isDialogOpen}
                 toggle={toggleDialog}
-                element={<CreateUserForm/>}
+                element={<CreateUserForm />}
                 heading="Add User"
             />
 
-            {/* User Table */}
-            <UserTable users={filteredUsers}/>
+            {/* Conditionally render User List or error */}
+            {error ? (
+                <ErrorMessage message="Error retrieving users" />
+            ) : (
+                <UserList users={filteredUsers} loading={loading} />
+            )}
         </div>
     );
 };
