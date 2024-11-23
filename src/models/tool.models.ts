@@ -1,3 +1,11 @@
+import {Category} from "./workHour.models.ts";
+import {Location} from "./location.models.ts";
+
+export interface ToolWithRelations extends ToolDTO {
+    location: Location;
+    category: Category | null;
+}
+
 export interface ToolDTO {
     id: number;
     name: string;
@@ -7,6 +15,8 @@ export interface ToolDTO {
     locationId: number;          // Required foreign key for the location
     status: ToolStatus;          // Tool status with a default value of 'ACTIVE'
     categoryId?: number;         // Optional category foreign key
+    category?: Category | null;  // Optional category object
+    location?: Location;         // Location object
 }
 
 // DTO for creating a new item
@@ -37,3 +47,4 @@ export enum ToolStatus {
     REPAIRED = 'REPAIRED',
     RETIRED = 'RETIRED',
 }
+

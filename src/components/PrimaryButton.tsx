@@ -14,19 +14,21 @@ const PrimaryButton: React.FC<ReusableButtonProps> = ({
                                                           label,
                                                           Icon,
                                                           className = '',
-                                                          disabled = false, // Added default value for disabled state
+                                                          disabled = false,
                                                       }) => {
     return (
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`inline-flex whitespace-nowrap items-center justify-center bg-primary-color text-white py-2 px-4 rounded-md 
-                   shadow-md hover:bg-primary-color-hover transition duration-300 
-                   focus:outline-none focus:ring-2 focus:ring-primary-color focus:ring-opacity-50 
-                   disabled:bg-gray-400 disabled:cursor-not-allowed ${className}`}
+            className={`inline-flex items-center justify-center bg-primary-color text-white 
+                py-2 px-6 rounded-full shadow-md 
+                hover:bg-primary-color-hover transition duration-300 
+                focus:outline-none focus:ring-2 focus:ring-primary-color focus:ring-opacity-50 
+                disabled:bg-gray-400 disabled:cursor-not-allowed 
+                ${className} w-auto`}
         >
-            {Icon && <Icon className="h-5 w-5 mr-2" />} {/* Render icon if provided */}
-            <span className="font-medium">{label}</span>
+            {Icon && <Icon className="h-5 w-5 mr-3" />} {/* Increased space between icon and label */}
+            <span className="font-medium text-sm sm:text-base">{label}</span> {/* Adjusted font size */}
         </button>
     );
 };

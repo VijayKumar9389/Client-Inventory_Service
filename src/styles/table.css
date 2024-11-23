@@ -1,80 +1,73 @@
 @layer components {
-    /* Simple Flat Data Table Styles */
     .data-table {
-        @apply min-w-full bg-white rounded-lg shadow; /* Clean white background with soft shadow */
+        @apply min-w-full;
 
         thead {
-            @apply bg-gray-100; /* Subtle header background */
+            @apply bg-gray-100 rounded-t-md;
+        }
 
-            th {
-                @apply p-3 text-gray-700 font-bold text-left; /* Lowercase, less bold for simplicity */
-            }
+        th {
+            @apply p-3 text-gray-700 font-bold text-left;
         }
 
         tbody {
-            @apply divide-y divide-gray-200; /* Light row separation */
+            @apply divide-y divide-gray-200;
 
             tr {
-                @apply hover:bg-gray-50 hover:cursor-pointer; /* Minimal hover effect */
-
+                @apply hover:bg-gray-50 hover:cursor-pointer;
             }
 
             td {
-                @apply p-3 text-gray-600; /* Softer gray text color */
+                @apply p-3 text-gray-600;
             }
 
-            /* Image cell styling */
             .image-square {
-                @apply w-12 h-12 object-cover rounded-full border-gray-700 ; /* Small, rounded images */
+                @apply h-20 w-20 object-cover rounded-lg border-gray-700;
             }
         }
 
-        /* Responsive adjustments */
         @media (max-width: 640px) {
             th, td {
-                @apply p-2 text-sm; /* Smaller padding and font size for mobile */
+                @apply p-2 text-sm;
             }
         }
     }
 
-    /* Minimalist Button Table Style */
     .button-table {
-        @apply min-w-full bg-white; /* Simplified white background */
+        @apply min-w-full bg-white;
 
         thead {
+            @apply bg-gray-100 rounded-t-md;
+        }
 
-            th {
-                @apply p-3 text-gray-600 font-bold text-left uppercase; /* Smaller, light-weight headers */
-            }
+        th {
+            @apply p-3 text-gray-700 font-bold text-left;
         }
 
         tbody {
             @apply divide-y divide-gray-100;
 
             tr {
-                @apply bg-white; /* Consistent white background without hover */
+                @apply bg-white;
             }
 
             td {
-                @apply p-3 text-gray-700; /* Simple text color */
+                @apply p-3 text-gray-700;
 
-                /* Image styling */
                 .image-square {
-                    @apply w-12 h-12 object-cover rounded; /* Small, consistent image size */
+                    @apply w-12 h-12 object-cover rounded;
                 }
             }
         }
 
-        /* Button styling within table cells */
         .tbl-button {
             @apply px-3 py-1 text-xs font-medium text-white rounded bg-blue-500;
-            @apply hover:bg-blue-600 focus:ring-1 focus:ring-blue-300 transition duration-150; /* Simplified hover and focus effects */
+            @apply hover:bg-blue-600 focus:ring-1 focus:ring-blue-300 transition duration-150;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 640px) {
             th, td {
-                @apply p-2 text-xs; /* Compact styling for mobile */
+                @apply p-2 text-xs;
             }
         }
     }

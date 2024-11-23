@@ -2,12 +2,13 @@ import {useFetchUserById} from '../../hooks/useFetchUsers';
 import {LoadingMessage, ErrorMessage} from '../../components/Message';
 import UpdateUserForm from './components/UpdateUserForm.tsx';
 import {deleteUser} from '../../services/user.services';
-import ConfirmationButton from '../../components/ConfirmationButton';
 import {useNavigate, useParams} from "react-router-dom";
 import Dialog from "../../components/Dialog.tsx";
 import {useState} from "react";
-import PrimaryButton from "../../components/PrimaryButton.tsx";
 import UserProfileInfo from "./components/UserProfileInfo.tsx";
+import ProfileButton from "../../components/ProfileButton.tsx";
+import {GrUpdate} from "react-icons/gr";
+import {RiDeleteBin2Fill} from "react-icons/ri";
 
 const UserProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -34,15 +35,11 @@ const UserProfile = () => {
     return (
         <div className="profile-container">
 
-            <UserProfileInfo user={user} />
+            <UserProfileInfo user={user}/>
 
             <div className="action-buttons">
-                <ConfirmationButton
-                    confirmationMessage="Are you sure you want to delete this user?"
-                    onConfirm={handleDeleteUser}
-                    buttonText="Delete User"
-                />
-                <PrimaryButton onClick={toggleDialog} label="Update User"/>
+                <ProfileButton onClick={toggleDialog} label="Update User" Icon={GrUpdate}/>
+                <ProfileButton onClick={handleDeleteUser} label="Delete User" Icon={RiDeleteBin2Fill}/>
             </div>
 
             <Dialog

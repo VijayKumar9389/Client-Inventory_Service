@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CreateToolDTO, UpdateToolDTO, ToolDTO, ToolStatus } from "../models/tool.models.ts";
+import {CreateToolDTO, UpdateToolDTO, ToolDTO, ToolStatus, ToolWithRelations} from "../models/tool.models.ts";
 
 export const createTool = async (itemData: CreateToolDTO): Promise<ToolDTO> => {
     const { data } = await axios.post('http://localhost:3000/api/tools', itemData);
@@ -36,7 +36,7 @@ export const getTools = async (): Promise<ToolDTO[]> => {
 };
 
 // Fetch a single tool by ID
-export const getToolById = async (itemId: number): Promise<ToolDTO> => {
+export const getToolById = async (itemId: number): Promise<ToolWithRelations> => {
     const { data } = await axios.get(`http://localhost:3000/api/tools/${itemId}`);
     return data;
 };

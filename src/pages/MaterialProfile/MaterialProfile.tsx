@@ -2,14 +2,15 @@ import {useParams} from "react-router-dom";
 import {useFetchMaterialById} from "../../hooks/useFetchMaterials.ts";
 import UpdateMaterialForm from "./components/EditMaterialForm.tsx";
 import {deleteMaterial} from "../../services/material.services.ts";
-import ConfirmationButton from "../../components/ConfirmationButton.tsx";
 import {ErrorMessage, LoadingMessage} from "../../components/Message.tsx";
 import InventoryTable from "./components/InventoryTable.tsx";
 import Dialog from "../../components/Dialog.tsx";
 import {useState} from "react";
-import PrimaryButton from "../../components/PrimaryButton.tsx";
 import Panel from "../../components/Panel.tsx";
 import MaterialProfileInfo from "./components/MaterialProfileInfo.tsx";
+import ProfileButton from "../../components/ProfileButton.tsx";
+import {FaIcons} from "react-icons/fa6";
+import {FaRemoveFormat} from "react-icons/fa";
 
 const MaterialProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -40,18 +41,12 @@ const MaterialProfile = () => {
     return (
         <div className="profile-container">
             {/* Material Profile Card */}
-
             <MaterialProfileInfo material={material}/>
-
 
             {/* Action Buttons inside Profile Card */}
             <div className="action-buttons">
-                <ConfirmationButton
-                    confirmationMessage="Are you sure you want to remove this material?"
-                    onConfirm={() => handleDeleteMaterial()}
-                    buttonText="Delete Material"
-                />
-                <PrimaryButton onClick={toggleDialog} label="Update Material"/>
+                <ProfileButton onClick={toggleDialog} label="Update Material" Icon={FaIcons}/>
+                <ProfileButton onClick={handleDeleteMaterial} label="Delete Material" Icon={FaRemoveFormat}/>
             </div>
 
             <Dialog

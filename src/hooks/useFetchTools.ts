@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import {getToolById, getTools, getToolsByCategory} from "../services/tool.services.ts";
-import {ToolDTO} from "../models/tool.models.ts";
+import {ToolDTO, ToolWithRelations} from "../models/tool.models.ts";
 
 export const useFetchTools = () => {
-    const [items, setItems] = useState<ToolDTO[]>([]);
+    const [tools, setTools] = useState<ToolDTO[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -11,7 +11,7 @@ export const useFetchTools = () => {
         const fetchItems = async () => {
             try {
                 const itemsData = await getTools();
-                setItems(itemsData);
+                setTools(itemsData);
             } catch (err) {
                 setError("Error fetching items.");
                 console.error(err);
@@ -23,18 +23,18 @@ export const useFetchTools = () => {
         fetchItems();
     }, []);
 
-    return { items, error, loading, setItems };
+    return {tools, error, loading };
 };
 
 export const useFetchToolById = (itemId: number) => {
-    const [item, setItem] = useState<ToolDTO | null>(null);
+    const [item, setItem] = useState<ToolWithRelations | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const itemData = await getToolById(itemId);
+                const itemData: ToolWithRelations = await getToolById(itemId);
                 setItem(itemData);
             } catch (err) {
                 setError("Error fetching item.");

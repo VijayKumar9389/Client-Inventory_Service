@@ -9,9 +9,10 @@ import Panel from "../../components/Panel.tsx";
 import Dialog from "../../components/Dialog.tsx";
 import {useState} from "react";
 import ToolInfo from "./components/ToolProfileInfo.tsx";
-import ProfileButton from "../../components/ProfileButton.tsx";
-import {FaIcons} from "react-icons/fa6";
-import {FaRemoveFormat} from "react-icons/fa";
+import PrimaryButton from "../../components/PrimaryButton.tsx";
+import {GrUpdate} from "react-icons/gr";
+import {MdDelete} from "react-icons/md";
+import {TbTransfer} from "react-icons/tb";
 
 const ToolProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -41,15 +42,23 @@ const ToolProfile = () => {
 
     return (
         <div className="profile-container">
+
+            {/* Item Header */}
+            <div className="profile-heading">
+                <div>
+                    <h1 className="profile-title">{item.name}</h1>
+                    <p className="profile-subtitle">{item.serialNumber}</p>
+                </div>
+                {/* Page Buttons */}
+                <div className="action-buttons">
+                    <PrimaryButton onClick={toggleDialog} label="Update Tool" Icon={GrUpdate}/>
+                    <PrimaryButton onClick={() => {}} label="Transfer Item" Icon={TbTransfer}/>
+                    <PrimaryButton onClick={handleDeleteTool} label="Delete Tool" Icon={MdDelete}/>
+                </div>
+            </div>
+
             {/* Item Info */}
             <ToolInfo item={item}/>
-
-            {/* Page Buttons */}
-            <div className="action-buttons">
-                <ProfileButton onClick={toggleDialog} label="Update Tool" Icon={FaIcons}/>
-                <ProfileButton onClick={handleDeleteTool} label="Delete Tool" Icon={FaRemoveFormat}/>
-                <ProfileButton onClick={() => {}} label="Transfer Item" Icon={FaRemoveFormat}/>
-            </div>
 
             <Dialog
                 element={<UpdateToolForm tool={item}/>}

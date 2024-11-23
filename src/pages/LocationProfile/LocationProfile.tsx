@@ -3,16 +3,17 @@ import {useFetchLocationById} from '../../hooks/useFetchLocations';
 import {ErrorMessage, LoadingMessage} from '../../components/Message';
 import UpdateLocationForm from './components/UpdateLocationForm';
 import {deleteLocation} from '../../services/location.services';
-import ConfirmationButton from '../../components/ConfirmationButton';
 import {getToolsByLocation} from '../../services/tool.services';
 import {useEffect, useState} from 'react';
 import {ToolDTO} from "../../models/tool.models.ts";
 import LocationToolsTable from "./components/LocationToolsTable.tsx";
 import LocationMaterialTable from "./components/LocationInventoryTable.tsx";
-import PrimaryButton from "../../components/PrimaryButton.tsx";
 import Dialog from "../../components/Dialog.tsx";
 import Panel from "../../components/Panel.tsx";
 import LocationProfileInfo from "./components/LocationProfileInfo.tsx";
+import ProfileButton from "../../components/ProfileButton.tsx";
+import {GrUpdate} from "react-icons/gr";
+import {RiDeleteBin2Fill} from "react-icons/ri";
 
 const LocationProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -52,15 +53,13 @@ const LocationProfile = () => {
 
     return (
         <div className="profile-container">
-            <LocationProfileInfo location={location} />
+            <LocationProfileInfo location={location}/>
+
             <div className="action-buttons">
-                <ConfirmationButton
-                    confirmationMessage={`Are you sure you want to remove ${location.name}?`}
-                    onConfirm={() => handleDeleteLocation(location.id)}
-                    buttonText="Delete Location"
-                />
-                <PrimaryButton onClick={toggleDialog} label="Update User"/>
+                <ProfileButton onClick={toggleDialog} label="Update Location" Icon={GrUpdate}/>
+                <ProfileButton onClick={() => handleDeleteLocation(locationId)} label="Delete Tool" Icon={RiDeleteBin2Fill}/>
             </div>
+
             <Dialog
                 isOpen={isDialogOpen}
                 toggle={toggleDialog}

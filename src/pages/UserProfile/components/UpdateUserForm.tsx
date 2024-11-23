@@ -104,6 +104,7 @@ const UpdateUserForm: React.FC<UpdateUserFormProps> = ({ user }) => {
                 <input
                     id="userIsActive"
                     type="checkbox"
+                    className="form-checkbox"
                     checked={isActive}
                     onChange={(e) => setIsActive(e.target.checked)}
                 />

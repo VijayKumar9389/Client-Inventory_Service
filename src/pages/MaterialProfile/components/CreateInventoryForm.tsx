@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Location } from '../../../models/location.models';
+import ProfileButton from "../../../components/ProfileButton.tsx";
+import {FaIcons} from "react-icons/fa6";
 
 interface CreateInventoryFormProps {
     materialId: number;
@@ -44,9 +46,9 @@ const CreateInventoryForm: React.FC<CreateInventoryFormProps> = ({ materialId })
     };
 
     // Submit the form
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         setIsSubmitting(true);
+         window.alert("Inventory created successfully");
 
         try {
             const res = await axios.post('http://localhost:3000/api/materials/inventory', formData);
@@ -94,14 +96,7 @@ const CreateInventoryForm: React.FC<CreateInventoryFormProps> = ({ materialId })
             </td>
             <td></td> {/* Empty cell to align with table structure */}
             <td>
-                <button
-                    type="button" // or "submit" if part of a form
-                    onClick={() => handleSubmit}
-                    className="tbl-button w-full"
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? 'Submitting...' : 'Create Inventory'}
-                </button>
+                <ProfileButton onClick={() => handleSubmit()} label="Update Material" Icon={FaIcons}/>
             </td>
         </tr>
     );

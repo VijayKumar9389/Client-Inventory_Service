@@ -16,8 +16,6 @@ const ToolProfileInfo: React.FC<ToolProfileInfoProps> = ({ item }) => {
                 <AiFillTool className="profile-icon" />
             )}
             <div className="profile-content">
-                <h1 className="profile-title">{item.name}</h1>
-                <p className="profile-subtitle">{item.serialNumber}</p>
                 <div className="profile-info">
                     <p className="profile-info-item">
                         <span className="profile-info-label">Cost:</span> ${item.cost}
@@ -31,7 +29,10 @@ const ToolProfileInfo: React.FC<ToolProfileInfoProps> = ({ item }) => {
                         </span>
                     </p>
                     <p className="profile-info-item">
-                        <span className="profile-info-label">Current Location:</span> {item.locationId}
+                        <span className="profile-info-label">Current Location:</span> {item.location?.name}
+                    </p>
+                    <p className="profile-info-item">
+                        <span className="profile-info-label">Catergory:</span> {item.category?.name}
                     </p>
                 </div>
             </div>

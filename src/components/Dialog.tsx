@@ -12,14 +12,14 @@ const Dialog: React.FC<DialogProps> = ({ isOpen, toggle, element, heading }) => 
     if (isOpen) {
         return (
             <div
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300"
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 transition-opacity duration-300 animate-fadeIn"
                 onClick={toggle}
                 role="dialog"
                 aria-labelledby="dialog-title"
                 aria-modal="true"
             >
                 <div
-                    className="bg-white w-11/12 sm:w-10/12 md:w-3/4 lg:w-3/4 xl:w-2/3 2xl:w-1/2 p-4 rounded-lg shadow-lg relative transition-transform transform"
+                    className="bg-white w-11/12 sm:w-10/12 md:w-3/4 lg:w-3/4 xl:w-2/3 2xl:w-1/2 p-4 rounded-lg shadow-lg relative transition-transform transform animate-slideUp"
                     onClick={(e) => e.stopPropagation()} // Stops click event from closing the dialog
                 >
                     <div className="flex justify-between items-center border-b pb-3 mb-4">

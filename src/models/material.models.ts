@@ -1,4 +1,6 @@
 // Material DTO for creating a new material (with optional categoryId)
+import {Category} from "./workHour.models.ts";
+
 export interface CreateMaterialDTO {
     name: string;                   // Name of the material (Required)
     costPerUnit?: number;           // Optional cost per unit (can be mapped to Decimal in the database)
@@ -35,4 +37,13 @@ export interface InventoryDTO {
     locationId: number;             // Foreign key reference to the Location
     createdAt: Date;                // Timestamp indicating when the inventory record was created
     updatedAt: Date;                // Timestamp indicating the last time the inventory record was updated
+}
+
+export interface MaterialWithInventoryDTO {
+    id: number;
+    name: string;
+    costPerUnit?: number;
+    imageUrl?: string;
+    category?: Category;
+    inventory: InventoryDTO[];
 }

@@ -5,18 +5,24 @@
 @import "./form.css";
 @import "./profile.css";
 @import "./typography.css";
+@import "./list.css";
+@import "./animations.css";
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Ensure full height and width for the root elements */
 html, body, #root {
   height: 100%;
   width: 100%;
 }
 
+/* Body styling */
 body {
   display: flex;
   flex-direction: column;
@@ -24,12 +30,23 @@ body {
   min-width: 320px;
   width: 100%;
   min-height: 100vh;
-  height: fit-content;
+  height: 100%; /* Ensure the body takes full height */
   font-family: "Roboto", sans-serif;
+  background-color: #f7f7f7; /* Optional: Set a light background color */
+  color: #333; /* Optional: Set default text color */
 }
 
+
+.page-container {
+  @apply flex flex-col items-center w-full p-4 lg:p-8 gap-4 lg:gap-8;
+}
 
 .action-buttons {
-  display: flex;
-  gap: 1rem;
+  @apply flex gap-4 justify-center flex-wrap;
 }
+
+.profile-heading {
+  @apply flex flex-col md:flex-row justify-between items-center text-gray-900;
+}
+
+

@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
-import {MaterialDTO} from "../models/material.models.ts";
+import {MaterialDTO, MaterialWithInventoryDTO} from "../models/material.models.ts";
 import {fetchMaterials, getMaterialById, getMaterialsByCategory} from "../services/material.services.ts";
 
 export const useFetchMaterials = () => {
-    const [materials, setMaterials] = useState<MaterialDTO[]>([]);
+    const [materials, setMaterials] = useState<MaterialWithInventoryDTO[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -27,7 +27,7 @@ export const useFetchMaterials = () => {
 }
 
 export const useFetchMaterialById = (id: number) => {
-    const [material, setMaterial] = useState<MaterialDTO | null>(null);
+    const [material, setMaterial] = useState<MaterialWithInventoryDTO | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
