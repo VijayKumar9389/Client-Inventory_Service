@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Location} from "../../../models/location.models.ts";
 import {deleteInventory} from "../../../services/material.services.ts";
 import {getInventoryByMaterialId} from "../../../services/material.services.ts";
@@ -9,13 +9,14 @@ interface InventoryItemDTO {
     quantity: number;
     locationId: number;
     location: Location; // Include location details here
+    createdAt: string;
 }
 
 interface InventoryTestProps {
     materialId: number; // Expecting materialId to be passed as a prop
 }
 
-const InventoryTable: React.FC<InventoryTestProps> = ({ materialId }) => {
+const InventoryTable: React.FC<InventoryTestProps> = ({materialId}) => {
     const [inventory, setInventory] = useState<InventoryItemDTO[]>([]);
     const [error, setError] = useState<string>('');
 
@@ -28,6 +29,16 @@ const InventoryTable: React.FC<InventoryTestProps> = ({ materialId }) => {
             setError('Error deleting inventory');
         }
     }
+
+    // Format to "Sep 20, 2022"
+    const convertDate = (date: string) => {
+        const newDate = new Date(date);
+        return newDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short", // Shortened month name like "Sep"
+            day: "2-digit", // Day with leading zero if needed
+        });
+    };
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -53,7 +64,8 @@ const InventoryTable: React.FC<InventoryTestProps> = ({ materialId }) => {
             <tr>
                 <th>Location Name</th>
                 <th>Quantity</th>
-                <th></th>
+                <th>Date Added</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -63,7 +75,10 @@ const InventoryTable: React.FC<InventoryTestProps> = ({ materialId }) => {
                     <tr key={item.id} tabIndex={0}>
                         <td>{item.location.name}</td>
                         <td>{item.quantity}</td>
-                        <td><button className="tbl-table" onClick={() => handleDelete(item.id)}>Delete</button></td>
+                        <td>{convertDate(item.createdAt)}</td>
+                        <td>
+                            <button className="tbl-table" onClick={() => handleDelete(item.id)}>Delete</button>
+                        </td>
                     </tr>
                 ))
             ) : (

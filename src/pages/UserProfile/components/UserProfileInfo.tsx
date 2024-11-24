@@ -1,16 +1,20 @@
 // UserProfileInfo.tsx
 import React from 'react';
-import { FaUser } from 'react-icons/fa';
+import {FaUser} from 'react-icons/fa';
 import {User} from '../../../models/user.models';
 
 interface UserProfileInfoProps {
     user: User;
 }
 
-const UserProfileInfo: React.FC<UserProfileInfoProps> = ({ user }) => {
+const UserProfileInfo: React.FC<UserProfileInfoProps> = ({user}) => {
     return (
-        <div className="profile-header">
-            <FaUser className="profile-icon" />
+        <div className="profile-details">
+            {/* Profile Image or Icon */}
+            <div className="profile-media">
+                <FaUser className="profile-icon"/>
+            </div>
+            {/* Profile Content */}
             <div className="profile-content">
                 <h2 className="profile-title">{user.name}</h2>
                 <p className="profile-subtitle">{user.role}</p>

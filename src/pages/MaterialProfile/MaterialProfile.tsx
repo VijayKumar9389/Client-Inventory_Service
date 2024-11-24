@@ -8,9 +8,10 @@ import Dialog from "../../components/Dialog.tsx";
 import {useState} from "react";
 import Panel from "../../components/Panel.tsx";
 import MaterialProfileInfo from "./components/MaterialProfileInfo.tsx";
-import ProfileButton from "../../components/ProfileButton.tsx";
 import {FaIcons} from "react-icons/fa6";
 import {FaRemoveFormat} from "react-icons/fa";
+import PrimaryButton from "../../components/PrimaryButton.tsx";
+import {MdArrowBack} from "react-icons/md";
 
 const MaterialProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -40,14 +41,15 @@ const MaterialProfile = () => {
 
     return (
         <div className="profile-container">
-            {/* Material Profile Card */}
-            <MaterialProfileInfo material={material}/>
-
             {/* Action Buttons inside Profile Card */}
             <div className="action-buttons">
-                <ProfileButton onClick={toggleDialog} label="Update Material" Icon={FaIcons}/>
-                <ProfileButton onClick={handleDeleteMaterial} label="Delete Material" Icon={FaRemoveFormat}/>
+                <PrimaryButton onClick={() => window.history.back()} label="Back" Icon={MdArrowBack}/>
+                <PrimaryButton onClick={toggleDialog} label="Update Material" Icon={FaIcons}/>
+                <PrimaryButton onClick={handleDeleteMaterial} label="Delete Material" Icon={FaRemoveFormat}/>
             </div>
+
+            {/* Material Profile Card */}
+            <MaterialProfileInfo material={material}/>
 
             <Dialog
                 element={<UpdateMaterialForm material={material}/>}

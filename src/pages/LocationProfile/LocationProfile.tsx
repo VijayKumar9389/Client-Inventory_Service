@@ -11,9 +11,10 @@ import LocationMaterialTable from "./components/LocationInventoryTable.tsx";
 import Dialog from "../../components/Dialog.tsx";
 import Panel from "../../components/Panel.tsx";
 import LocationProfileInfo from "./components/LocationProfileInfo.tsx";
-import ProfileButton from "../../components/ProfileButton.tsx";
 import {GrUpdate} from "react-icons/gr";
 import {RiDeleteBin2Fill} from "react-icons/ri";
+import PrimaryButton from "../../components/PrimaryButton.tsx";
+import {MdArrowBack} from "react-icons/md";
 
 const LocationProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -53,12 +54,15 @@ const LocationProfile = () => {
 
     return (
         <div className="profile-container">
-            <LocationProfileInfo location={location}/>
 
             <div className="action-buttons">
-                <ProfileButton onClick={toggleDialog} label="Update Location" Icon={GrUpdate}/>
-                <ProfileButton onClick={() => handleDeleteLocation(locationId)} label="Delete Tool" Icon={RiDeleteBin2Fill}/>
+                <PrimaryButton onClick={() => window.history.back()} label="Back" Icon={MdArrowBack}/>
+                <PrimaryButton onClick={toggleDialog} label="Update Location" Icon={GrUpdate}/>
+                <PrimaryButton onClick={() => handleDeleteLocation(locationId)} label="Delete Tool"
+                               Icon={RiDeleteBin2Fill}/>
             </div>
+
+            <LocationProfileInfo location={location}/>
 
             <Dialog
                 isOpen={isDialogOpen}

@@ -4,7 +4,7 @@
 
 /* Reusable Card Container */
 .card-container {
-    @apply cursor-pointer flex flex-col sm:flex-row items-center p-4 gap-4 bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300;
+    @apply cursor-pointer flex flex-col sm:flex-row items-start p-4 gap-4 bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300;
 }
 
 /* Image Section */
@@ -29,7 +29,7 @@
 
 /* Name Section */
 .card-title {
-    @apply font-bold text-lg text-primary-color mb-4;
+    @apply font-bold text-lg text-primary-color mb-1;
 }
 
 /* Grid for Details */

@@ -11,7 +11,7 @@ import {useState} from "react";
 import ToolInfo from "./components/ToolProfileInfo.tsx";
 import PrimaryButton from "../../components/PrimaryButton.tsx";
 import {GrUpdate} from "react-icons/gr";
-import {MdDelete} from "react-icons/md";
+import {MdArrowBack, MdDelete} from "react-icons/md";
 import {TbTransfer} from "react-icons/tb";
 
 const ToolProfile = () => {
@@ -43,18 +43,12 @@ const ToolProfile = () => {
     return (
         <div className="profile-container">
 
-            {/* Item Header */}
-            <div className="profile-heading">
-                <div>
-                    <h1 className="profile-title">{item.name}</h1>
-                    <p className="profile-subtitle">{item.serialNumber}</p>
-                </div>
-                {/* Page Buttons */}
-                <div className="action-buttons">
-                    <PrimaryButton onClick={toggleDialog} label="Update Tool" Icon={GrUpdate}/>
-                    <PrimaryButton onClick={() => {}} label="Transfer Item" Icon={TbTransfer}/>
-                    <PrimaryButton onClick={handleDeleteTool} label="Delete Tool" Icon={MdDelete}/>
-                </div>
+            {/* Page Buttons */}
+            <div className="action-buttons">
+                <PrimaryButton onClick={() => window.history.back()} label="Back" Icon={MdArrowBack}/>
+                <PrimaryButton onClick={toggleDialog} label="Update Tool" Icon={GrUpdate}/>
+                <PrimaryButton onClick={() => window.alert("feature not ready")} label="Transfer Item" Icon={TbTransfer}/>
+                <PrimaryButton onClick={handleDeleteTool} label="Delete Tool" Icon={MdDelete}/>
             </div>
 
             {/* Item Info */}
@@ -71,11 +65,11 @@ const ToolProfile = () => {
                 <>
                     <Panel
                         element={<RelatedTools categoryId={item.categoryId} itemId={item.id}/>}
-                           heading="Related Tools"
+                        heading="Related Tools"
                     />
                     <Panel
                         element={<RelatedMaterials
-                        categoryId={item.categoryId}/>}
+                            categoryId={item.categoryId}/>}
                         heading="Related Materials"
                     />
                 </>

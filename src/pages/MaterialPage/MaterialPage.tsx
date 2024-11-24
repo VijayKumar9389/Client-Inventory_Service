@@ -16,10 +16,12 @@ const MaterialPage = () => {
     // Handles search input change
     const handleSearch = (value: string) => setSearchTerm(value);
 
+    // Toggles dialog open/close state
     const toggleDialog = () => {
         setIsDialogOpen(!isDialogOpen);
     };
 
+    // Filter materials based on search term
     const filteredMaterials = materials.filter(material => {
         return material.name.toLowerCase().includes(searchTerm.toLowerCase());
     });

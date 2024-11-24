@@ -41,12 +41,16 @@ body {
   @apply flex flex-col items-center w-full p-4 lg:p-8 gap-4 lg:gap-8;
 }
 
+/* Action Buttons */
 .action-buttons {
-  @apply flex gap-4 justify-center flex-wrap;
+  @apply flex gap-6 justify-start flex-wrap items-center;
 }
 
-.profile-heading {
-  @apply flex flex-col md:flex-row justify-between items-center text-gray-900;
+/* Buttons on mobile devices */
+@media (max-width: 768px) {
+  .action-buttons {
+    @apply flex-col gap-4;
+  }
 }
 
 

@@ -6,9 +6,10 @@ import {useNavigate, useParams} from "react-router-dom";
 import Dialog from "../../components/Dialog.tsx";
 import {useState} from "react";
 import UserProfileInfo from "./components/UserProfileInfo.tsx";
-import ProfileButton from "../../components/ProfileButton.tsx";
 import {GrUpdate} from "react-icons/gr";
 import {RiDeleteBin2Fill} from "react-icons/ri";
+import PrimaryButton from "../../components/PrimaryButton.tsx";
+import {MdArrowBack} from "react-icons/md";
 
 const UserProfile = () => {
     const {id} = useParams<{ id: string }>();
@@ -35,12 +36,13 @@ const UserProfile = () => {
     return (
         <div className="profile-container">
 
-            <UserProfileInfo user={user}/>
-
             <div className="action-buttons">
-                <ProfileButton onClick={toggleDialog} label="Update User" Icon={GrUpdate}/>
-                <ProfileButton onClick={handleDeleteUser} label="Delete User" Icon={RiDeleteBin2Fill}/>
+                <PrimaryButton onClick={() => window.history.back()} label="Back" Icon={MdArrowBack}/>
+                <PrimaryButton onClick={toggleDialog} label="Update User" Icon={GrUpdate}/>
+                <PrimaryButton onClick={handleDeleteUser} label="Delete User" Icon={RiDeleteBin2Fill}/>
             </div>
+
+            <UserProfileInfo user={user}/>
 
             <Dialog
                 isOpen={isDialogOpen}
