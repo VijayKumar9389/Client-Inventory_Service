@@ -43,7 +43,7 @@ body {
 
 /* Action Buttons */
 .action-buttons {
-  @apply flex gap-6 justify-start flex-wrap items-center;
+  @apply flex gap-6 justify-end flex-wrap items-center;
 }
 
 /* Buttons on mobile devices */

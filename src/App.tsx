@@ -1,20 +1,22 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 
-import UserPage from './pages/UserPage/UserPage.tsx';
-import UserProfile from "./pages/UserProfile/UserProfile.tsx";
+import UserPage from './features/Users/UserPage/UserPage.tsx';
+import UserProfile from "./features/Users/UserProfile/UserProfile.tsx";
 
-import ToolPage from './pages/ToolPage/ToolPage.tsx';
-import ToolProfile from './pages/ToolProfile/ToolProfile.tsx';
+import ToolPage from './features/Tools/ToolPage/ToolPage.tsx';
+import ToolProfile from './features/Tools/ToolProfile/ToolProfile.tsx';
 
-import MaterialPage from "./pages/MaterialPage/MaterialPage.tsx";
-import MaterialProfile from "./pages/MaterialProfile/MaterialProfile.tsx";
+import MaterialPage from "./features/Materials/MaterialPage/MaterialPage.tsx";
+import MaterialProfile from "./features/Materials/MaterialProfile/MaterialProfile.tsx";
 
-import LocationPage from './pages/LocationPage/LocationPage.tsx';
-import LocationProfile from "./pages/LocationProfile/LocationProfile.tsx";
+import SitePage from './features/Sites/SitePage/SitePage.tsx';
+import SiteProfile from "./features/Sites/SiteProfile/SiteProfile.tsx";
+
+import CategoryManager from "./components/CategoryManager.tsx";
 
 import './styles/app.css';
-import Navbar from "./components/Navbar/Navbar.tsx";
+import Navbar from "./components/layout/Navbar/Navbar.tsx";
 
 const App: React.FC = () => (
     <div className="bg-background-color min-h-screen">
@@ -25,10 +27,11 @@ const App: React.FC = () => (
                 <Route path="/users/:id" element={<UserProfile/>}/>
                 <Route path="/tools" element={<ToolPage/>}/>
                 <Route path="/tools/:id" element={<ToolProfile/>}/>
-                <Route path="/locations" element={<LocationPage/>}/>
-                <Route path="/locations/:id" element={<LocationProfile/>}/>
+                <Route path="/site" element={<SitePage/>}/>
+                <Route path="/site/:id" element={<SiteProfile/>}/>
                 <Route path="/materials" element={<MaterialPage/>}/>
                 <Route path="/materials/:id" element={<MaterialProfile/>}/>
+                <Route path={"/categories"} element={<CategoryManager/>}/>
             </Routes>
         </div>
     </div>

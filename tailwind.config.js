@@ -10,13 +10,14 @@ export default {
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
+
         // Primary Colors
-        'primary-color': '#000000',  // Cool Blue for main actions
-        'primary-color-hover': '#1a1a1a', // Slightly darker for hover effects
+        'primary-color': '#2563EB',  // Blue-600 for main actions
+        'primary-color-hover': '#1D4ED8', // Slightly darker blue for hover effects
 
         // Secondary Colors
-        'secondary-color': '#50E3C2',  // Teal for secondary actions
-        'secondary-color-hover': '#39BBA7', // Darker teal for hover effects
+        'secondary-color': '#4F46E5',  // Indigo-600 for secondary actions
+        'secondary-color-hover': '#4338CA', // Slightly darker indigo for hover effects
 
         // Alert/Status Colors
         'cancel-color': '#E74C3C', // Red for cancel buttons or error states
@@ -26,9 +27,11 @@ export default {
         'info-color': '#3498DB', // Light blue for information messages
 
         // Backgrounds
-        'background-color': '#F7FAFC', // Light gray for page background
-        'card-background-color': '#FFFFFF', // White for card backgrounds
-        'card-background-hover-color': '#F0F4F8', // Very light gray for card hover
+        'background-color': '#F9FAFB', // Neutral light gray with a slightly modern touch for page background.
+        'card-background-color': '#FFFFFF', // Pure white for card backgrounds for a clean and sharp look.
+        'card-background-hover-color': '#fff', // Slightly darker neutral tone for card hover, enhancing accessibility.
+        'highlight-background-color': '#EDF2F7', // Cool, soft blue-gray for hover effects, creating a modern feel.
+        'accent-background-color': '#E5E7EB', // Neutral gray for headers or secondary elements, ensuring subtle separation.
 
         // Input Fields and Buttons
         'input-background-color': '#EDF2F7', // Light gray for inputs

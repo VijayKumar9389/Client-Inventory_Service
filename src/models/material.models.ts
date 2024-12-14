@@ -29,6 +29,13 @@ export interface MaterialDTO {
     updatedAt: Date;                // Last update timestamp
 }
 
+export interface CreateInventoryDTO {
+    materialId: number;
+    locationId: number;
+    quantity: number;
+    expiryDate?: string; // Optional expiry date
+}
+
 // Inventory DTO for tracking materials stored in each location
 export interface InventoryDTO {
     id: number;                     // Unique identifier for the inventory record
@@ -39,11 +46,7 @@ export interface InventoryDTO {
     updatedAt: Date;                // Timestamp indicating the last time the inventory record was updated
 }
 
-export interface MaterialWithInventoryDTO {
-    id: number;
-    name: string;
-    costPerUnit?: number;
-    imageUrl?: string;
+export interface MaterialWithInventoryDTO extends MaterialDTO {
     category?: Category;
     inventory: InventoryDTO[];
 }

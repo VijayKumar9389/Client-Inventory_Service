@@ -1,21 +1,31 @@
 @layer components {
 
     .form-wrapper {
-        @apply grid gap-4 md:grid-cols-2 p-4;
+        @apply grid gap-4 md:grid-cols-2 ;
         /* Responsive two-column layout */
     }
 
     .form-container {
-        @apply flex flex-col gap-4;
+        @apply flex flex-col gap-4 p-4;
         /* Vertical spacing between form fields */
     }
 
+    .form-field-wrapper {
+        @apply flex flex-col gap-2;
+        /* Flex column to stack the label and input vertically with some gap */
+    }
+
     .form-label {
-        @apply block text-gray-600 font-semibold text-sm tracking-wide;
+        @apply block text-black text-sm tracking-wide mb-0;
         /* More compact label with subtle emphasis */
     }
 
+    .form-textarea {
+        @apply h-28 resize-none;
+    }
+
     .form-input,
+    .form-textarea,
     .form-select {
         @apply block w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm;
         @apply focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out;
@@ -63,13 +73,29 @@
         /* Small, easily noticeable error text */
     }
 
+    .form-footer {
+        @apply flex w-full items-center justify-start bg-white rounded-b-lg;
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+    }
+
     .form-button {
-        @apply bg-blue-600 text-white py-2 px-4 rounded-md shadow-md w-fit ml-auto;
-        @apply hover:bg-blue-700 transition duration-200;
-        @apply focus:outline-none focus:ring-2 focus:ring-blue-400;
-        @apply disabled:bg-gray-300 disabled:text-gray-600 disabled:cursor-not-allowed;
-        /* Clear disabled state styling */
-        font-size: 0.875rem;
+        @apply bg-primary-color text-white py-2 px-6 rounded-full shadow-md inline-flex items-center justify-center ml-auto;
+        @apply hover:bg-primary-color-hover transition duration-300;
+        @apply focus:outline-none focus:ring-2 focus:ring-opacity-50;
+        @apply disabled:bg-gray-400 disabled:cursor-not-allowed;
+
+        /* Typography */
+        @apply text-sm font-medium sm:text-base;
+
+        /* Adjust for alignment or container-specific use cases */
+        width: fit-content;
+
+        /* Icon support (optional, for buttons with icons) */
+        .icon {
+            @apply mr-3 h-5 w-5;
+        }
     }
 
     /* Checkbox and Switch Styles */

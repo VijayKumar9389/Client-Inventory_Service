@@ -13,19 +13,20 @@ const CategoryManager = () => {
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const [categoryType, setCategoryType] = useState<'tools' | 'materials'>('tools'); // State to toggle between tool and material categories
 
-    // Fetch all categories when the component loads
+    // Fetch categories based on type (tools or materials)
     useEffect(() => {
         fetchCategories();
-    }, []);
+    }, [categoryType]);
 
     const fetchCategories = async () => {
         try {
             setLoading(true);
-            const response = await getAllCategories();
+            const response = await getAllCategories(categoryType); // Use the general service function
             setCategories(response);
         } catch (err) {
-            setError('Error fetching categories');
+            setError(`Error fetching ${categoryType} categories`);
         } finally {
             setLoading(false);
         }
@@ -39,7 +40,7 @@ const CategoryManager = () => {
         try {
             setError(null);
             setLoading(true);
-            const createdCategory = await createCategory({ name: newCategoryName });
+            const createdCategory = await createCategory(categoryType, newCategoryName);
             setCategories((prev) => [...prev, createdCategory]);
             setNewCategoryName('');
             setMessage('Category created successfully');
@@ -54,7 +55,7 @@ const CategoryManager = () => {
     const handleDeleteCategory = async (categoryId: number) => {
         try {
             setLoading(true);
-            await deleteCategory(categoryId);
+            await deleteCategory(categoryType, categoryId );
             setCategories((prev) => prev.filter((category) => category.id !== categoryId));
             setMessage('Category deleted successfully');
         } catch (err) {
@@ -67,6 +68,22 @@ const CategoryManager = () => {
     return (
         <div className="p-8 bg-gray-100">
             <h1 className="text-3xl font-bold mb-6 text-center">Category Manager</h1>
+
+            {/* Toggle buttons for tools or materials */}
+            <div className="text-center mb-6">
+                <button
+                    onClick={() => setCategoryType('tools')}
+                    className={`px-4 py-2 mr-4 ${categoryType === 'tools' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                >
+                    Tool Categories
+                </button>
+                <button
+                    onClick={() => setCategoryType('materials')}
+                    className={`px-4 py-2 ${categoryType === 'materials' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                >
+                    Material Categories
+                </button>
+            </div>
 
             {/* Form to create a new category */}
             <form
